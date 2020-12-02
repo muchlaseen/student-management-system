@@ -36,31 +36,32 @@ public class StudentFrame extends javax.swing.JFrame {
         nameInputPanel = new javax.swing.JPanel();
         firstNamePanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtNamaDepan = new javax.swing.JTextField();
         lastNamePanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtNamaBelakang = new javax.swing.JTextField();
         otherInputPanel = new javax.swing.JPanel();
         npmPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        npmLabel = new javax.swing.JLabel();
+        txtNpm = new javax.swing.JTextField();
         jurusanPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbJurusan = new javax.swing.JComboBox<>();
         alamatPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtAlamat = new javax.swing.JTextField();
         phonePanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtNoTelp = new javax.swing.JTextField();
         footerPanel = new javax.swing.JPanel();
         actionPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnTambah = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         tablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbMhs = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Management System");
@@ -123,7 +124,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Nama Depan");
         firstNamePanel.add(jLabel2, java.awt.BorderLayout.PAGE_START);
-        firstNamePanel.add(jTextField6, java.awt.BorderLayout.CENTER);
+        firstNamePanel.add(txtNamaDepan, java.awt.BorderLayout.CENTER);
 
         nameInputPanel.add(firstNamePanel);
 
@@ -132,7 +133,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Nama Belakang");
         lastNamePanel.add(jLabel3, java.awt.BorderLayout.NORTH);
-        lastNamePanel.add(jTextField7, java.awt.BorderLayout.CENTER);
+        lastNamePanel.add(txtNamaBelakang, java.awt.BorderLayout.CENTER);
 
         nameInputPanel.add(lastNamePanel);
 
@@ -143,9 +144,9 @@ public class StudentFrame extends javax.swing.JFrame {
         npmPanel.setPreferredSize(new java.awt.Dimension(305, 50));
         npmPanel.setLayout(new java.awt.BorderLayout(0, 4));
 
-        jLabel4.setText("NIM");
-        npmPanel.add(jLabel4, java.awt.BorderLayout.PAGE_START);
-        npmPanel.add(jTextField5, java.awt.BorderLayout.CENTER);
+        npmLabel.setText("NPM");
+        npmPanel.add(npmLabel, java.awt.BorderLayout.PAGE_START);
+        npmPanel.add(txtNpm, java.awt.BorderLayout.CENTER);
 
         otherInputPanel.add(npmPanel);
 
@@ -155,8 +156,8 @@ public class StudentFrame extends javax.swing.JFrame {
         jLabel5.setText("Jurusan");
         jurusanPanel.add(jLabel5, java.awt.BorderLayout.PAGE_START);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Teknik Informatika", "Teknik Sipil", "Teknik Industri", "Teknik Kelautan" }));
-        jurusanPanel.add(jComboBox1, java.awt.BorderLayout.CENTER);
+        cbJurusan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Teknik Informatika", "Teknik Sipil", "Teknik Industri", "Teknik Kelautan" }));
+        jurusanPanel.add(cbJurusan, java.awt.BorderLayout.CENTER);
 
         otherInputPanel.add(jurusanPanel);
 
@@ -165,7 +166,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Alamat");
         alamatPanel.add(jLabel6, java.awt.BorderLayout.PAGE_START);
-        alamatPanel.add(jTextField4, java.awt.BorderLayout.CENTER);
+        alamatPanel.add(txtAlamat, java.awt.BorderLayout.CENTER);
 
         otherInputPanel.add(alamatPanel);
 
@@ -174,7 +175,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jLabel7.setText("No. Telpon");
         phonePanel.add(jLabel7, java.awt.BorderLayout.PAGE_START);
-        phonePanel.add(jTextField8, java.awt.BorderLayout.CENTER);
+        phonePanel.add(txtNoTelp, java.awt.BorderLayout.CENTER);
 
         otherInputPanel.add(phonePanel);
 
@@ -184,24 +185,32 @@ public class StudentFrame extends javax.swing.JFrame {
 
         footerPanel.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        actionPanel.setLayout(new java.awt.BorderLayout(0, 5));
+        actionPanel.setLayout(new java.awt.BorderLayout(5, 5));
 
-        jButton1.setText("Tambah");
-        jButton1.setPreferredSize(new java.awt.Dimension(150, 23));
-        actionPanel.add(jButton1, java.awt.BorderLayout.WEST);
+        btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/add_new_24px.png"))); // NOI18N
+        btnTambah.setText("Add");
+        btnTambah.setPreferredSize(new java.awt.Dimension(95, 23));
+        actionPanel.add(btnTambah, java.awt.BorderLayout.WEST);
 
-        jButton2.setText("Update");
-        jButton2.setPreferredSize(new java.awt.Dimension(150, 33));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/edit_24px.png"))); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.setPreferredSize(new java.awt.Dimension(95, 33));
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
-        actionPanel.add(jButton2, java.awt.BorderLayout.EAST);
+        actionPanel.add(btnUpdate, java.awt.BorderLayout.CENTER);
 
-        jButton4.setText("Delete");
-        jButton4.setPreferredSize(new java.awt.Dimension(73, 32));
-        actionPanel.add(jButton4, java.awt.BorderLayout.SOUTH);
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/waste_24px.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setPreferredSize(new java.awt.Dimension(95, 32));
+        actionPanel.add(btnDelete, java.awt.BorderLayout.EAST);
+
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/clear_symbol_24px.png"))); // NOI18N
+        btnClear.setText("Clear");
+        btnClear.setPreferredSize(new java.awt.Dimension(73, 32));
+        actionPanel.add(btnClear, java.awt.BorderLayout.SOUTH);
 
         javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
         footerPanel.setLayout(footerPanelLayout);
@@ -228,7 +237,7 @@ public class StudentFrame extends javax.swing.JFrame {
         tablePanel.setPreferredSize(new java.awt.Dimension(600, 430));
         tablePanel.setLayout(new java.awt.BorderLayout(0, 4));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbMhs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -247,7 +256,7 @@ public class StudentFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbMhs);
 
         tablePanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -256,45 +265,46 @@ public class StudentFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionPanel;
     private javax.swing.JPanel alamatPanel;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnTambah;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cbJurusan;
     private javax.swing.JPanel firstNamePanel;
     private javax.swing.JPanel footerPanel;
     private javax.swing.JPanel formPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JPanel jurusanPanel;
     private javax.swing.JPanel lastNamePanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel nameInputPanel;
+    private javax.swing.JLabel npmLabel;
     private javax.swing.JPanel npmPanel;
     private javax.swing.JPanel otherInputPanel;
     private javax.swing.JPanel phonePanel;
     private javax.swing.JPanel separatorPanel;
     private javax.swing.JPanel tablePanel;
+    private javax.swing.JTable tbMhs;
     private javax.swing.JPanel titlePanel;
+    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextField txtNamaBelakang;
+    private javax.swing.JTextField txtNamaDepan;
+    private javax.swing.JTextField txtNoTelp;
+    private javax.swing.JTextField txtNpm;
     // End of variables declaration//GEN-END:variables
 }
