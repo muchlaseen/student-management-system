@@ -50,6 +50,9 @@ public class StudentFrame extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -61,9 +64,9 @@ public class StudentFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Management System");
-        setMaximumSize(new java.awt.Dimension(1000, 500));
-        setMinimumSize(new java.awt.Dimension(800, 500));
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setMaximumSize(new java.awt.Dimension(1500, 550));
+        setMinimumSize(new java.awt.Dimension(800, 550));
+        setPreferredSize(new java.awt.Dimension(1000, 550));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 0));
 
@@ -111,7 +114,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3);
 
-        jPanel5.setPreferredSize(new java.awt.Dimension(400, 240));
+        jPanel5.setPreferredSize(new java.awt.Dimension(400, 300));
 
         jPanel9.setPreferredSize(new java.awt.Dimension(400, 60));
 
@@ -135,7 +138,7 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jPanel5.add(jPanel9);
 
-        jPanel10.setPreferredSize(new java.awt.Dimension(400, 200));
+        jPanel10.setPreferredSize(new java.awt.Dimension(400, 240));
 
         jPanel8.setPreferredSize(new java.awt.Dimension(305, 50));
         jPanel8.setLayout(new java.awt.BorderLayout(0, 4));
@@ -152,7 +155,7 @@ public class StudentFrame extends javax.swing.JFrame {
         jLabel5.setText("Jurusan");
         jPanel11.add(jLabel5, java.awt.BorderLayout.PAGE_START);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Teknik Informatika", "Teknik Sipil", "Teknik Industri", "Teknik Kelautan" }));
         jPanel11.add(jComboBox1, java.awt.BorderLayout.CENTER);
 
         jPanel10.add(jPanel11);
@@ -165,6 +168,15 @@ public class StudentFrame extends javax.swing.JFrame {
         jPanel12.add(jTextField4, java.awt.BorderLayout.CENTER);
 
         jPanel10.add(jPanel12);
+
+        jPanel15.setPreferredSize(new java.awt.Dimension(305, 50));
+        jPanel15.setLayout(new java.awt.BorderLayout(0, 4));
+
+        jLabel7.setText("No. Telpon");
+        jPanel15.add(jLabel7, java.awt.BorderLayout.PAGE_START);
+        jPanel15.add(jTextField8, java.awt.BorderLayout.CENTER);
+
+        jPanel10.add(jPanel15);
 
         jPanel5.add(jPanel10);
 
@@ -188,7 +200,7 @@ public class StudentFrame extends javax.swing.JFrame {
         jPanel14.add(jButton2, java.awt.BorderLayout.EAST);
 
         jButton4.setText("Delete");
-        jButton4.setPreferredSize(new java.awt.Dimension(73, 30));
+        jButton4.setPreferredSize(new java.awt.Dimension(73, 32));
         jPanel14.add(jButton4, java.awt.BorderLayout.SOUTH);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -205,7 +217,7 @@ public class StudentFrame extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel13);
@@ -218,15 +230,23 @@ public class StudentFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nama Depan", "Nama Belakang", "NPM", "Jurusan", "Alamat", "No. Telpon"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -252,12 +272,14 @@ public class StudentFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -273,5 +295,6 @@ public class StudentFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }
