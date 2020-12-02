@@ -5,6 +5,12 @@
  */
 package student.management.system;
 
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Achmad Muchlasin
@@ -16,6 +22,7 @@ public class StudentFrame extends javax.swing.JFrame {
      */
     public StudentFrame() {
         initComponents();
+        loadTable();
     }
 
     /**
@@ -190,6 +197,11 @@ public class StudentFrame extends javax.swing.JFrame {
         btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/add_new_24px.png"))); // NOI18N
         btnTambah.setText("Add");
         btnTambah.setPreferredSize(new java.awt.Dimension(95, 23));
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
         actionPanel.add(btnTambah, java.awt.BorderLayout.WEST);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/edit_24px.png"))); // NOI18N
@@ -205,11 +217,21 @@ public class StudentFrame extends javax.swing.JFrame {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/waste_24px.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setPreferredSize(new java.awt.Dimension(95, 32));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         actionPanel.add(btnDelete, java.awt.BorderLayout.EAST);
 
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons/clear_symbol_24px.png"))); // NOI18N
         btnClear.setText("Clear");
         btnClear.setPreferredSize(new java.awt.Dimension(73, 32));
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
         actionPanel.add(btnClear, java.awt.BorderLayout.SOUTH);
 
         javax.swing.GroupLayout footerPanelLayout = new javax.swing.GroupLayout(footerPanel);
@@ -239,21 +261,26 @@ public class StudentFrame extends javax.swing.JFrame {
 
         tbMhs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nama Depan", "Nama Belakang", "NPM", "Jurusan", "Alamat", "No. Telpon"
+                "No", "NPM", "Nama Depan", "Nama Belakang", "Jurusan", "Alamat", "No. Telpon"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbMhs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMhsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbMhs);
@@ -267,8 +294,106 @@ public class StudentFrame extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        try {
+            String sql = "UPDATE student SET npm = '" + txtNpm.getText() + "', nama_depan = '" + txtNamaDepan.getText() + "', nama_belakang = '" + txtNamaBelakang.getText() + "', jurusan = '" + cbJurusan.getSelectedItem()+"', alamat = '" + txtAlamat.getText() + "', no_telp = '" + txtNoTelp.getText() + "' WHERE npm = '" + txtNpm.getText() + "'";
+            Connection conn = (Connection)Config.configDB();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Data berhasil diubah");
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, "Data gagal diubah, karena " + e.getMessage());
+        }
+        loadTable();
+        resetForm();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        // TODO add your handling code here:
+        try {
+            String sql = "INSERT INTO student VALUES ('" + txtNpm.getText() + "','" + txtNamaDepan.getText() + "','" + txtNamaBelakang.getText() + "','" + cbJurusan.getSelectedItem() + "','" + txtAlamat.getText() + "','" + txtNoTelp.getText() + "')";
+            Connection conn = (Connection)Config.configDB();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ups, data gagal disimpan");
+        }
+        loadTable();
+        resetForm();
+    }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void tbMhsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMhsMouseClicked
+        // TODO add your handling code here:
+        int row = tbMhs.rowAtPoint(evt.getPoint());
+        String npm = tbMhs.getValueAt(row, 1).toString();
+        txtNpm.setText(npm);
+        String nama_depan = tbMhs.getValueAt(row, 2).toString();
+        txtNamaDepan.setText(nama_depan);
+        String nama_belakang = tbMhs.getValueAt(row, 3).toString();
+        txtNamaBelakang.setText(nama_belakang);
+        String jurusan = tbMhs.getValueAt(row, 4).toString();
+        cbJurusan.setSelectedItem(jurusan);
+        String alamat = tbMhs.getValueAt(row, 5).toString();
+        txtAlamat.setText(alamat);
+        String telp = tbMhs.getValueAt(row, 6).toString();
+        txtNoTelp.setText(telp);
+    }//GEN-LAST:event_tbMhsMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        try {
+            String sql = "DELETE FROM student WHERE npm = '" + txtNpm.getText() + "'";
+            Connection conn = (Connection)Config.configDB();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus");
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(this, "Data gagal dihapus, karena " + e.getMessage());
+        }
+        loadTable();
+        resetForm();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        resetForm();
+    }//GEN-LAST:event_btnClearActionPerformed
+    
+    private void loadTable() {
+        DefaultTableModel model= new DefaultTableModel();
+        model.addColumn("No");
+        model.addColumn("NPM");
+        model.addColumn("Nama Depan");
+        model.addColumn("Nama Belakang");
+        model.addColumn("Jurusan");
+        model.addColumn("Alamat");
+        model.addColumn("No. Telpon");
+        
+        // load dari database ke table model
+        try {
+            int no_tb = 1;
+            String sql = "SELECT * FROM student";
+            Connection conn = (Connection)Config.configDB();
+            Statement sttm = conn.createStatement();
+            ResultSet rs = sttm.executeQuery(sql);
+            while(rs.next()) {
+                model.addRow(new Object[]{no_tb++, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});    
+            }
+            tbMhs.setModel(model);
+        } catch (Exception e) {
+        }
+    }
+    
+    private void resetForm() {
+        txtNpm.setText(null);
+        txtNamaDepan.setText(null);
+        txtNamaBelakang.setText(null);
+        cbJurusan.setSelectedIndex(0);
+        txtAlamat.setText(null);
+        txtNoTelp.setText(null);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionPanel;
